@@ -1,6 +1,7 @@
 from setuptools import setup
 from setuptools import find_packages
 from os.path import join, dirname
+import io
 
 with open(join(dirname(__file__), "foolbox/VERSION")) as f:
     version = f.read().strip()
@@ -8,7 +9,7 @@ with open(join(dirname(__file__), "foolbox/VERSION")) as f:
 try:
     # obtain long description from README
     readme_path = join(dirname(__file__), "README.rst")
-    with open(readme_path, encoding="utf-8") as f:
+    with io.open(readme_path, encoding="utf-8") as f:
         README = f.read()
 except IOError:
     README = ""

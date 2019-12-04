@@ -45,13 +45,13 @@ Criteria can be combined to create a new criterion:
 
 """
 import abc
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 import numpy as np
 
 from .utils import softmax
 
 
-class Criterion(abc.ABC):
+class Criterion:
     """Base class for criteria that define what is adversarial.
 
     The :class:`Criterion` class represents a criterion used to
@@ -60,6 +60,7 @@ class Criterion(abc.ABC):
     new criteria. Subclasses must implement is_adversarial.
 
     """
+    __metaclass__ = ABCMeta
 
     def name(self):
         """Returns a human readable name that uniquely identifies

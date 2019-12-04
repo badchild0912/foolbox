@@ -7,10 +7,11 @@ import numpy as np
 
 from .utils import batch_crossentropy
 from . import nprng
-from abc import abstractmethod, ABC
+from abc import abstractmethod, ABCMeta
 
 
-class GradientEstimatorBase(ABC):
+class GradientEstimatorBase:
+    __metaclass__ = ABCMeta
     @abstractmethod
     def estimate_one(self, pred_fn, x, label, bounds):
         raise NotImplementedError()
@@ -74,7 +75,7 @@ class EvolutionaryStrategiesGradientEstimator(GradientEstimatorBase):
     .. [1] Andrew Ilyas, Logan Engstrom, Anish Athalye, Jessy Lin,
            "Black-box Adversarial Attacks with Limited Queries and
            Information", https://arxiv.org/abs/1804.08598
-    .. [2] Daan Wierstra, Tom Schaul, Jan Peters, Jürgen Schmidhuber,
+    .. [2] Daan Wierstra, Tom Schaul, Jan Peters, Jurgen Schmidhuber,
            "Natural evolution strategies",
            http://people.idsia.ch/~tom/publications/nes.pdf
 

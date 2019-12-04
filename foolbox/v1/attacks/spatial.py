@@ -17,7 +17,7 @@ class SpatialAttack(Attack):
     References
     ----------
     .. [1] Logan Engstrom*, Brandon Tran*, Dimitris Tsipras*,
-           Ludwig Schmidt, Aleksander Mądry: "A Rotation and a
+           Ludwig Schmidt, Aleksander Madry: "A Rotation and a
            Translation Suffice: Fooling CNNs with Simple Transformations",
            http://arxiv.org/abs/1712.02779
     """

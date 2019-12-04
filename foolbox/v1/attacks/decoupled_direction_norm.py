@@ -11,7 +11,7 @@ class DecoupledDirectionNormL2Attack(Attack):
 
     References
     ----------
-    .. [1] Jérôme Rony, Luiz G. Hafemann, Luiz S. Oliveira, Ismail Ben Ayed,
+    .. [1] Jerome Rony, Luiz G. Hafemann, Luiz S. Oliveira, Ismail Ben Ayed,
     Robert Sabourin, Eric Granger, "Decoupling Direction and Norm for Efficient
     Gradient-Based L2 Adversarial Attacks and Defenses",
     https://arxiv.org/abs/1811.09600

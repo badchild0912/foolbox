@@ -529,7 +529,8 @@ class HopSkipJumpAttack(Attack):
 
     def printv(self, *args, **kwargs):
         if self.verbose:
-            print(*args, **kwargs)
+            print(args, kwargs)
+            #print(*args, **kwargs)
 
 
 def BoundaryAttackPlusPlus(

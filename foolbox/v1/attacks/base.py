@@ -2,7 +2,7 @@ import warnings
 import logging
 import functools
 import abc
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 
 from ..adversarial import Adversarial
 from ..adversarial import StopAttack
@@ -11,7 +11,7 @@ from ...criteria import Misclassification
 from ...distances import MSE
 
 
-class Attack(abc.ABC):
+class Attack:
     """Abstract base class for adversarial attacks.
 
     The :class:`Attack` class represents an adversarial attack that searches
@@ -49,6 +49,7 @@ class Attack(abc.ABC):
 
     """
 
+    __metaclass__ = ABCMeta
     def __init__(
         self, model=None, criterion=Misclassification(), distance=MSE, threshold=None
     ):

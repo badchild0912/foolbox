@@ -11,7 +11,7 @@ class CarliniWagnerL2Attack(Attack):
 
     This attack is described in [1]_. This implementation
     is based on the reference implementation by Carlini [2]_.
-    For bounds ≠ (0, 1), it differs from [2]_ because we
+    For bounds != (0, 1), it differs from [2]_ because we
     normalize the squared L2 loss with the bounds.
 
     References

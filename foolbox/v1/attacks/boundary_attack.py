@@ -1212,7 +1212,8 @@ class BoundaryAttack(Attack):
 
     def printv(self, *args, **kwargs):
         if self.verbose:
-            print(*args, **kwargs)
+            print(args, kwargs)
+            #print(*args, **kwargs)
 
 
 class DummyExecutor(Executor):

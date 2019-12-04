@@ -49,7 +49,7 @@ class Attack(BaseAttack):
             distance=distance,
             threshold=threshold,
             individual_kwargs=individual_kwargs,
-            **kwargs,
+            **kwargs
         )
 
         if unpack:
@@ -80,7 +80,9 @@ def generator_decorator(generator):
             )
         else:
             try:
-                _ = yield from generator(self, a, **kwargs)
+                for temp in generator(self, a, **kwargs):
+                    _ = temp
+                #_ = yield from generator(self, a, **kwargs)
                 assert _ is None, "decorated __call__ method must return None"
             except StopAttack:
                 # if a threshold is specified, StopAttack will be thrown

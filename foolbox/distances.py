@@ -37,20 +37,21 @@ implement the :meth:`_calculate` method.
 
 """
 import abc
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 import functools
 import numpy as np
 from numbers import Number
 
 
 @functools.total_ordering
-class Distance(abc.ABC):
+class Distance:
     """Base class for distances.
 
     This class should be subclassed when implementing
     new distances. Subclasses must implement _calculate.
 
     """
+    __metaclass__ = ABCMeta
 
     def __init__(self, reference=None, other=None, bounds=None, value=None):
 
@@ -247,7 +248,7 @@ def EN(l1_factor=1.0):
     """
 
     def __init__(self, *kargs, **kwargs):
-        ElasticNet.__init__(self, *kargs, **kwargs, l1_factor=l1_factor)
+        ElasticNet.__init__(self, l1_factor=l1_factor, *kargs, **kwargs)
 
     name = "EN_{}".format(l1_factor).replace(".", "")
     newclass = type(name, (ElasticNet, Distance), {"__init__": __init__})

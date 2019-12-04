@@ -95,7 +95,8 @@ def run_sequential(
 
         for i in range(len(individual_kwargs)):
             assert isinstance(individual_kwargs[i], dict)
-            individual_kwargs[i] = {**kwargs, **individual_kwargs[i]}
+            individual_kwargs[i] = {kwargs, individual_kwargs[i]}
+            #individual_kwargs[i] = {**kwargs, **individual_kwargs[i]}
 
     advs = [
         Adversarial(
@@ -226,7 +227,8 @@ def run_parallel(  # noqa: C901
 
         for i in range(len(individual_kwargs)):
             assert isinstance(individual_kwargs[i], dict)
-            individual_kwargs[i] = {**kwargs, **individual_kwargs[i]}
+            individual_kwargs[i] = {kwargs, individual_kwargs[i]}
+            #individual_kwargs[i] = {**kwargs, **individual_kwargs[i]}
 
     advs = [
         Adversarial(

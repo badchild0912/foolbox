@@ -21,7 +21,9 @@ class SingleStepGradientBaseAttack(Attack):
         x = a.unperturbed
         min_, max_ = a.bounds()
 
-        gradient = yield from self._gradient(a)
+        for tmp in self._gradient(a):
+            gradient = tmp
+        #gradient = yield from self._gradient(a)
 
         if not isinstance(epsilons, Iterable):
             epsilons = np.linspace(0, max_epsilon, num=epsilons + 1)[1:]
@@ -34,7 +36,9 @@ class SingleStepGradientBaseAttack(Attack):
                 perturbed = x + gradient * epsilon
                 perturbed = np.clip(perturbed, min_, max_)
 
-                _, is_adversarial = yield from a.forward_one(perturbed)
+                for tmp in a.forward_one(perturbed):
+                    _, is_adversarial = tmp
+                #_, is_adversarial = yield from a.forward_one(perturbed)
                 if is_adversarial:
                     if decrease_if_first and i < 20:
                         logging.info("repeating attack with smaller epsilons")
@@ -75,11 +79,15 @@ class GradientAttack(SingleStepGradientBaseAttack):
 
         """
 
-        yield from self._run(a, epsilons=epsilons, max_epsilon=max_epsilon)
+        for tmp in self._run(a, epsilons=epsilons, max_epsilon=max_epsilon):
+            tmp
+        #yield from self._run(a, epsilons=epsilons, max_epsilon=max_epsilon)
 
     def _gradient(self, a):
         min_, max_ = a.bounds()
-        gradient = yield from a.gradient_one()
+        for temp in a.gradient_one():
+            gradient = temp
+        #gradient = yield from a.gradient_one()
         gradient_norm = np.sqrt(np.mean(np.square(gradient)))
         gradient = gradient / (gradient_norm + 1e-8) * (max_ - min_)
         return gradient
@@ -122,11 +130,15 @@ class GradientSignAttack(SingleStepGradientBaseAttack):
 
         """
 
-        yield from self._run(a, epsilons=epsilons, max_epsilon=max_epsilon)
+        for temp in self._run(a, epsilons=epsilons, max_epsilon=max_epsilon):
+            temp
+        #yield from self._run(a, epsilons=epsilons, max_epsilon=max_epsilon)
 
     def _gradient(self, a):
         min_, max_ = a.bounds()
-        gradient = yield from a.gradient_one()
+        for tmp in a.gradient_one():
+            gradient = tmp
+        #gradient = yield from a.gradient_one()
         gradient = np.sign(gradient) * (max_ - min_)
         return gradient
 

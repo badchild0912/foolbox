@@ -51,9 +51,11 @@ class Adversarial(BaseAdversarial):
 
         assert predictions.ndim == 1
         if return_details:
-            return predictions, is_adversarial, is_best, distance
+            yield predictions, is_adversarial, is_best, distance
+            #return predictions, is_adversarial, is_best, distance
         else:
-            return predictions, is_adversarial
+            yield predictions, is_adversarial
+            #return predictions, is_adversarial
 
     def forward(self, inputs, greedy=False, strict=True, return_details=False):
         """Interface to model.forward for attacks.
@@ -98,22 +100,27 @@ class Adversarial(BaseAdversarial):
             )
             if is_adversarial and greedy:
                 if return_details:
-                    return predictions, is_adversarial, i, is_best, distance
+                    yield predictions, is_adversarial, i, is_best, distance
+                    #return predictions, is_adversarial, i, is_best, distance
                 else:
-                    return predictions, is_adversarial, i
+                    yield predictions, is_adversarial, i
+                    #return predictions, is_adversarial, i
             adversarials.append(is_adversarial)
 
         if greedy:  # pragma: no cover
             # no adversarial found
             if return_details:
-                return predictions, False, None, False, None
+                yield predictions, False, None, False, None
+                #return predictions, False, None, False, None
             else:
-                return predictions, False, None
+                yield predictions, False, None
+                #return predictions, False, None
 
         is_adversarial = np.array(adversarials)
         assert is_adversarial.ndim == 1
         assert is_adversarial.shape[0] == inputs.shape[0]
-        return predictions, is_adversarial
+        yield predictions, is_adversarial
+        #return predictions, is_adversarial
 
     def gradient_one(self, x=None, label=None, strict=True):
         """Interface to model.gradient_one for attacks.
@@ -150,7 +157,8 @@ class Adversarial(BaseAdversarial):
         )
 
         assert gradient.shape == x.shape
-        return gradient
+        yield gradient
+        #return gradient
 
     def forward_and_gradient_one(
         self, x=None, label=None, strict=True, return_details=False
@@ -197,9 +205,11 @@ class Adversarial(BaseAdversarial):
         assert predictions.ndim == 1
         assert gradient.shape == x.shape
         if return_details:
-            return predictions, gradient, is_adversarial, is_best, distance
+            yield predictions, gradient, is_adversarial, is_best, distance
+            #return predictions, gradient, is_adversarial, is_best, distance
         else:
-            return predictions, gradient, is_adversarial
+            yield predictions, gradient, is_adversarial
+            #return predictions, gradient, is_adversarial
 
     def backward_one(self, gradient, x=None, strict=True):
         """Interface to model.backward_one for attacks.
@@ -240,4 +250,5 @@ class Adversarial(BaseAdversarial):
         )
 
         assert gradient.shape == x.shape
-        return gradient
+        yield gradient
+        #return gradient

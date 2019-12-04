@@ -1,6 +1,6 @@
 import numpy as np
 import abc
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 import collections
 
 
@@ -85,7 +85,7 @@ def _create_preprocessing_fn(params):
     return preprocessing
 
 
-class Model(abc.ABC):
+class Model:
     """Base class to provide attacks with a unified interface to models.
 
     The :class:`Model` class represents a model and provides a
@@ -115,6 +115,7 @@ class Model(abc.ABC):
         (before "mean" is subtracted), e.g. to convert RGB to BGR.
 
     """
+    __metaclass__ = ABCMeta
 
     def __init__(self, bounds, channel_axis, preprocessing=(0, 1)):
         assert len(bounds) == 2
